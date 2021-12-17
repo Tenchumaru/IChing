@@ -3,8 +3,24 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>I Ching</title>
     <style>
-        img {
-            background-color: black;
+        body {
+            background-color: white;
+            margin: 0;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            position: absolute;
+            left: 10px;
+        }
+
+        .outer {
+            position: relative;
+        }
+
+        .row img {
             display: block;
             height: 30px;
             margin: auto;
@@ -12,19 +28,122 @@
             position: relative;
         }
 
+        .animate {
+            position: absolute;
+        }
+
         .margin {
             margin-top: 200px;
+            text-align: center;
+            width: max-content;
+            display: grid;
+            grid-template-columns: auto auto;
+            align-items: center;
+            grid-gap: 20px;
+        }
+
+        .left {
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-gap: 10px;
+        }
+
+        .center {
+            height: 570px;
+            width: 270px;
+            display: grid;
+            grid-gap: 6px;
+            position: absolute;
+            left: 127px;
+        }
+
+        .off {
+            display: none;
+        }
+
+        .last {
+            background-color: white;
+            position: relative;
+        }
+
+        .full {
+            width: 90px;
+            height: 90px;
+            position: absolute;
+            z-index: 2;
+        }
+
+        .buttons {
+            position: absolute;
+            top: 120px;
+            display: flex;
+            justify-content: center;
+            width: 104px;
+        }
+
+        .block {
+            height: 90px;
+            background-color: white;
+        }
+
+        .cover {
+            height: 90px;
+            background-color: white;
+            position: absolute;
+            width: 270px;
+        }
+
+
+        .object {
+            position: relative;
+            display: flex;
+            align-items: center;
         }
 
         .coins {
             border: 1px solid black;
-            width: 102px;
+            position: absolute;
+            padding: 3px;
+            width: 96px;
+            top: -112px;
+            height: 216px;
         }
 
-        .next {
-            border: 1px solid transparent;
+        .right {
+            position: absolute;
+            margin-bottom: 115px;
+            left: 477px;
+            width: 240px;
+            height: 70px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            justify-items: center;
+            align-items: center;
+            opacity: 0;
+            font-size: 48px;
+        }
+
+        .character {
+            background-color: wheat;
+            width: 110px;
+            text-align: center;
+            margin: 0 5px;
+        }
+
+        .coin_row {
+            display: flex;
+        }
+
+        .coin_column {
+            position: relative;
+            width: 90px;
+            height: 90px;
+        }
+
+        .row {
+            padding: 93px 3px;
             height: 30px;
-            width: 100px;
+            position: absolute;
         }
 
         .flip {
@@ -40,34 +159,35 @@
             animation-name: move;
         }
 
-        .all {
+        .a1 {
             animation-direction: alternate, normal, normal;
             animation-duration: .2s, 2s, 2s;
             animation-iteration-count: 10, 1, 1;
             animation-fill-mode: none, both, both;
+            z-index: 1;
         }
 
-        .r1.all {
+        .r1.a1 {
             animation-name: flip, grow, move-r1;
         }
 
-        .r2.all {
+        .r2.a1 {
             animation-name: flip, grow, move-r2;
         }
 
-        .r3.all {
+        .r3.a1 {
             animation-name: flip, grow, move-r3;
         }
 
-        .r4.all {
+        .r4.a1 {
             animation-name: flip, grow, move-r4;
         }
 
-        .r5.all {
+        .r5.a1 {
             animation-name: flip, grow, move-r5;
         }
 
-        .r6.all {
+        .r6.a1 {
             animation-name: flip, grow, move-r6;
         }
 
@@ -101,7 +221,7 @@
 
             to {
                 left: 120px;
-                top: -150px;
+                top: -270px;
             }
         }
 
@@ -113,7 +233,7 @@
 
             to {
                 left: 120px;
-                top: -90px;
+                top: -174px;
             }
         }
 
@@ -125,7 +245,7 @@
 
             to {
                 left: 120px;
-                top: -30px;
+                top: -78px;
             }
         }
 
@@ -137,7 +257,7 @@
 
             to {
                 left: 120px;
-                top: 30px;
+                top: 18px;
             }
         }
 
@@ -149,7 +269,7 @@
 
             to {
                 left: 120px;
-                top: 90px;
+                top: 114px;
             }
         }
 
@@ -161,7 +281,177 @@
 
             to {
                 left: 120px;
-                top: 150px;
+                top: 210px;
+            }
+        }
+
+        .a2 {
+            animation-duration: 2s;
+            animation-fill-mode: both;
+            animation-name: move-img;
+        }
+
+        @keyframes move-img {
+            from {
+                left: 120px;
+            }
+
+            to {
+                left: 360px;
+            }
+        }
+
+        .a3 {
+            animation-duration: 2s;
+            animation-fill-mode: both;
+        }
+
+        .last.a3 {
+            animation-name: fade-img;
+        }
+
+        .to.a3 {
+            animation-name: move-final;
+        }
+
+        @keyframes fade-img {
+            from {
+                opacity: 1;
+            }
+
+            30% {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        @keyframes move-final {
+            from {
+                left: 0px;
+            }
+
+            to {
+                left: 120px;
+            }
+        }
+
+        .a4 {
+            animation-duration: 2s;
+            animation-fill-mode: both;
+        }
+
+        .c1.a4 {
+            animation-name: collapse-c1;
+        }
+
+        .c2.a4 {
+            animation-name: collapse-c2;
+        }
+
+        .c3.a4 {
+            animation-name: collapse-c3;
+        }
+
+        .c4.a4 {
+            animation-name: collapse-c4;
+        }
+
+        .c5.a4 {
+            animation-name: collapse-c5;
+        }
+
+        .c6.a4 {
+            animation-name: collapse-c6;
+        }
+
+        @keyframes collapse-c1 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: 265px;
+            }
+        }
+
+        @keyframes collapse-c2 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: 180px;
+            }
+        }
+
+        @keyframes collapse-c3 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: 95px;
+            }
+        }
+
+        @keyframes collapse-c4 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: 10px;
+            }
+        }
+
+        @keyframes collapse-c5 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: -75px;
+            }
+        }
+
+        @keyframes collapse-c6 {
+            from {
+                left: 360px;
+                top: 45px;
+            }
+
+            to {
+                left: 360px;
+                top: -160px;
+            }
+        }
+
+        .a5 {
+            animation-duration: 2s;
+            animation-fill-mode: both;
+            animation-name: show-text;
+        }
+
+        @keyframes show-text {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
             }
         }
     </style>
@@ -172,48 +462,357 @@
         }
 
         function doit(className) {
-            for (let el of getImages()) {
-                el.className += ' ' + className;
+            const nexts = Array.from(document.getElementsByClassName('next'));
+            const next = nexts[nexts.length - 1];
+            next.classList.remove('next');
+            const image = next.firstElementChild;
+            image.classList.add(className);
+            if (nexts.length === 1) {
+                document.getElementById('a1').disabled = true;
             }
         }
 
+        const names = ['乾', '坤', '屯', '蒙', '需', '訟', '師', '比', '小畜', '履', '泰', '否', '同人', '大有', '謙', '豫', '隨', '蠱',
+            '臨', '觀', '噬嗑', '賁', '剝', '復', '無妄', '大畜', '頤', '大過', '坎', '離', '咸', '恆', '遯', '大壯', '晉', '明夷', '家人',
+            '睽', '蹇', '解', '損', '益', '夬', '姤', '萃', '升', '困', '井', '革', '鼎', '震', '艮', '漸', '歸妹', '豐', '旅', '巽',
+            '兌', '渙', '節', '中孚', '小過', '既濟', '未濟'];
+        const indices = [
+            63, 0, 17, 34, 23, 58, 2, 16,
+            55, 59, 7, 56, 61, 47, 4, 8,
+            25, 38, 3, 48, 41, 37, 32, 1,
+            57, 39, 33, 30, 18, 45, 28, 14,
+            60, 15, 40, 5, 53, 43, 20, 10,
+            35, 49, 31, 62, 24, 6, 26, 22,
+            29, 46, 9, 36, 52, 11, 13, 44,
+            54, 27, 50, 19, 51, 12, 21, 42,
+        ];
+        const results = [];
+
         function onAnimationEnd(event) {
             console.log(event);
+            if (event.animationName === 'flip') {
+                const rowNumber = event.target.id.substr(1);
+                let totalValue = 0;
+                for (let columnNumber of [1, 2, 3]) {
+                    const coinValue = Math.floor(2 + 2 * Math.random());
+                    totalValue += coinValue;
+                    const coinImageId = `r${rowNumber}c${columnNumber}c${coinValue}`;
+                    const coinImage = document.getElementById(coinImageId);
+                    coinImage.classList.remove('off');
+                }
+                const imageId = `r${rowNumber}i${totalValue}`;
+                console.log(imageId);
+                const image = document.getElementById(imageId);
+                image.classList.add('a2');
+            } else if (event.animationName === 'move-img') {
+                results.push(event.target);
+                if (results.length === 6) {
+                    if (results.some((result) => result.classList.contains('final'))) {
+                        for (let target of results) {
+                            for (let el of Array.from(target.children)) {
+                                el.classList.add('a3');
+                            }
+                        }
+                    } else {
+                        for (let target of results) {
+                            target.classList.add('a4');
+                        }
+                        const secondCharacter = document.getElementsByClassName('second')[0];
+                        secondCharacter.classList.add('off');
+                    }
+                }
+            } else if (event.animationName === 'move-final') {
+                for (let target of results) {
+                    target.classList.add('a4');
+                }
+            } else if (event.animationName === 'collapse-c6') {
+                let leftValue = 0, rightValue = 0;
+                for (let target of results) {
+                    leftValue >>= 1;
+                    rightValue >>= 1;
+                    switch (target.id.substr(3)) {
+                        case '6':
+                            rightValue += 32;
+                            break;
+                        case '7':
+                            leftValue += 32;
+                            rightValue += 32;
+                            break;
+                        case '8':
+                            break;
+                        case '9':
+                            leftValue += 32;
+                            break;
+                    }
+                }
+                const leftIndex = indices.indexOf(leftValue);
+                const rightIndex = indices.indexOf(rightValue);
+                const leftName = names[leftIndex];
+                const rightName = names[rightIndex];
+                const right = document.getElementById('right');
+                right.children[0].innerText = leftName;
+                right.children[1].innerText = rightName;
+                right.classList.add('a5');
+            }
         }
     </script>
 </head>
 
 <body>
-    <div class="margin">
-        <div class="coins">
-            <div class="next">
-                <img id="r1" class="r1" src="Box Measurements.svg" />
+    <div class="container">
+        <div id="right" class="right">
+            <div class="character">乾</div>
+            <div class="second character">小畜</div>
+        </div>
+        <div class="outer">
+            <div class="coins">
+                <div class="next row">
+                    <img id="r1" class="animate r1" src="three_coins.svg" />
+                </div>
+                <div class="next row">
+                    <img id="r2" class="animate r2" src="three_coins.svg" />
+                </div>
+                <div class="next row">
+                    <img id="r3" class="animate r3" src="three_coins.svg" />
+                </div>
+                <div class="next row">
+                    <img id="r4" class="animate r4" src="three_coins.svg" />
+                </div>
+                <div class="next row">
+                    <img id="r5" class="animate r5" src="three_coins.svg" />
+                </div>
+                <div class="next row">
+                    <img id="r6" class="animate r6" src="three_coins.svg" />
+                </div>
             </div>
-            <div class="next">
-                <img id="r2" class="r2" src="Box Measurements.svg" />
-            </div>
-            <div class="next">
-                <img id="r3" class="r3" src="Box Measurements.svg" />
-            </div>
-            <div class="next">
-                <img id="r4" class="r4" src="Box Measurements.svg" />
-            </div>
-            <div class="next">
-                <img id="r5" class="r5" src="Box Measurements.svg" />
-            </div>
-            <div class="next">
-                <img id="r6" class="r6" src="Box Measurements.svg" />
+            <div class="buttons">
+                <div><button id="flip" style="display:none">Flip</button></div>
+                <div><button id="move" style="display:none">Move</button></div>
+                <div><button id="a1">&gt;&gt;&gt;&gt;&gt;&gt;</button></div>
             </div>
         </div>
-        <div><button id="flip">Flip</button></div>
-        <div><button id="move">Move</button></div>
-        <div><button id="all">Both</button></div>
+        <div class="center">
+            <div class="r1 object">
+                <div id="r1i6" class="animate c1 final">
+                    <img id="r1i68" class="animate from i8" src="8.svg" />
+                    <img id="r1i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r1i7" class="animate c1">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r1i8" class="animate c1">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r1i9" class="animate c1 final">
+                    <img id="r1i97" class="animate from i7" src="7.svg" />
+                    <img id="r1i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+            <div class="r2 object">
+                <div id="r2i6" class="animate c2 final">
+                    <img id="r2i68" class="animate from i8" src="8.svg" />
+                    <img id="r2i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r2i7" class="animate c2">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r2i8" class="animate c2">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r2i9" class="animate c2 final">
+                    <img id="r2i97" class="animate from i7" src="7.svg" />
+                    <img id="r2i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+            <div class="r3 object">
+                <div id="r3i6" class="animate c3 final">
+                    <img id="r3i68" class="animate from i8" src="8.svg" />
+                    <img id="r3i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r3i7" class="animate c3">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r3i8" class="animate c3">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r3i9" class="animate c3 final">
+                    <img id="r3i97" class="animate from i7" src="7.svg" />
+                    <img id="r3i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+            <div class="r4 object">
+                <div id="r4i6" class="animate c4 final">
+                    <img id="r4i68" class="animate from i8" src="8.svg" />
+                    <img id="r4i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r4i7" class="animate c4">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r4i8" class="animate c4">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r4i9" class="animate c4 final">
+                    <img id="r4i97" class="animate from i7" src="7.svg" />
+                    <img id="r4i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+            <div class="r5 object">
+                <div id="r5i6" class="animate c5 final">
+                    <img id="r5i68" class="animate from i8" src="8.svg" />
+                    <img id="r5i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r5i7" class="animate c5">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r5i8" class="animate c5">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r5i9" class="animate c5 final">
+                    <img id="r5i97" class="animate from i7" src="7.svg" />
+                    <img id="r5i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+            <div class="r6 object">
+                <div id="r6i6" class="animate c6 final">
+                    <img id="r6i68" class="animate from i8" src="8.svg" />
+                    <img id="r6i67" class="animate to i7" src="7.svg" />
+                    <img class="animate last i6" src="6.svg" />
+                </div>
+                <div id="r6i7" class="animate c6">
+                    <img class="animate from i7" src="7.svg" />
+                    <img class="animate to i7" src="7.svg" />
+                </div>
+                <div id="r6i8" class="animate c6">
+                    <img class="animate from i8" src="8.svg" />
+                    <img class="animate to i8" src="8.svg" />
+                </div>
+                <div id="r6i9" class="animate c6 final">
+                    <img id="r6i97" class="animate from i7" src="7.svg" />
+                    <img id="r6i98" class="animate to i8" src="8.svg" />
+                    <img class="animate last i9" src="9.svg" />
+                </div>
+            </div>
+        </div>
+        <div class="center">
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+            <div class="block"></div>
+        </div>
+        <div class="center">
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r1c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r1c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r1c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r1c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r1c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r1c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r2c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r2c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r2c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r2c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r2c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r2c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r3c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r3c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r3c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r3c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r3c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r3c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r4c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r4c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r4c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r4c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r4c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r4c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r5c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r5c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r5c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r5c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r5c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r5c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r6c1c2" class="full off col1 c2" src="silver_coin.svg" />
+                    <img id="r6c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r6c2c2" class="full off col2 c2" src="silver_coin.svg" />
+                    <img id="r6c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                </div>
+                <div class="coin_column">
+                    <img id="r6c3c2" class="full off col3 c2" src="silver_coin.svg" />
+                    <img id="r6c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                </div>
+            </div>
+        </div>
     </div>
     <script>
-        for (let el of getImages()) {
+        for (let el of Array.from(document.getElementsByClassName('animate'))) {
             el.addEventListener('animationend', onAnimationEnd);
         }
-        for (let s of ['flip', 'move', 'all']) {
+        for (let s of ['flip', 'move', 'a1']) {
             document.getElementById(s).addEventListener('click', () => doit(s));
         }
     </script>
