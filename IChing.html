@@ -110,11 +110,11 @@
         }
 
         .right {
+            margin-top: 10px;
             position: absolute;
-            margin-bottom: 115px;
             left: 477px;
             width: 240px;
-            height: 70px;
+            height: 245px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             justify-items: center;
@@ -128,6 +128,9 @@
             width: 110px;
             text-align: center;
             margin: 0 5px;
+        }
+
+        .number {
         }
 
         .coin_row {
@@ -461,15 +464,15 @@
             return array;
         }
 
+        let thrown_count = 0;
+
         function doit(className) {
-            const nexts = Array.from(document.getElementsByClassName('next'));
-            const next = nexts[nexts.length - 1];
-            next.classList.remove('next');
-            const image = next.firstElementChild;
+            const image = document.getElementById('thrown');
+            image.className = 'animate';
+            image.classList.add('r' + (6 - thrown_count));
             image.classList.add(className);
-            if (nexts.length === 1) {
-                document.getElementById('a1').disabled = true;
-            }
+            ++thrown_count;
+            document.getElementById('a1').disabled = true;
         }
 
         const names = ['乾', '坤', '屯', '蒙', '需', '訟', '師', '比', '小畜', '履', '泰', '否', '同人', '大有', '謙', '豫', '隨', '蠱',
@@ -491,7 +494,11 @@
         function onAnimationEnd(event) {
             console.log(event);
             if (event.animationName === 'flip') {
-                const rowNumber = event.target.id.substr(1);
+                const rowNumber = Number(Array.from(event.target.classList).find((s) => s.startsWith('r')).substr(1));
+                if (thrown_count < 6) {
+                    document.getElementById('a1').disabled = false;
+                    event.target.className = 'animate';
+                }
                 let totalValue = 0;
                 for (let columnNumber of [1, 2, 3]) {
                     const coinValue = Math.floor(2 + 2 * Math.random());
@@ -552,6 +559,8 @@
                 const right = document.getElementById('right');
                 right.children[0].innerText = leftName;
                 right.children[1].innerText = rightName;
+                right.children[2].innerText = leftIndex + 1;
+                right.children[3].innerText = rightIndex + 1;
                 right.classList.add('a5');
             }
         }
@@ -561,28 +570,15 @@
 <body>
     <div class="container">
         <div id="right" class="right">
-            <div class="character">乾</div>
-            <div class="second character">小畜</div>
+            <div class="character"></div>
+            <div class="second character"></div>
+            <div class="number"></div>
+            <div class="second number"></div>
         </div>
         <div class="outer">
             <div class="coins">
-                <div class="next row">
-                    <img id="r1" class="animate r1" src="three_coins.svg" />
-                </div>
-                <div class="next row">
-                    <img id="r2" class="animate r2" src="three_coins.svg" />
-                </div>
-                <div class="next row">
-                    <img id="r3" class="animate r3" src="three_coins.svg" />
-                </div>
-                <div class="next row">
-                    <img id="r4" class="animate r4" src="three_coins.svg" />
-                </div>
-                <div class="next row">
-                    <img id="r5" class="animate r5" src="three_coins.svg" />
-                </div>
-                <div class="next row">
-                    <img id="r6" class="animate r6" src="three_coins.svg" />
+                <div class="row">
+                    <img id="thrown" class="animate r1" src="three_coins.svg" />
                 </div>
             </div>
             <div class="buttons">
@@ -722,88 +718,89 @@
             <div class="block"></div>
         </div>
         <div class="center">
+            <!-- https://www.alvin-portal.org/alvin/view.jsf?pid=alvin-record%3A254971&dswid=-4865 -->
             <div class="coin_row">
                 <div class="coin_column">
-                    <img id="r1c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r1c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                    <img id="r1c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r1c1c3" class="full off col1 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r1c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r1c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                    <img id="r1c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r1c2c3" class="full off col2 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r1c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r1c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                    <img id="r1c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r1c3c3" class="full off col3 c3" src="heads.png" />
                 </div>
             </div>
             <div class="coin_row">
                 <div class="coin_column">
-                    <img id="r2c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r2c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                    <img id="r2c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r2c1c3" class="full off col1 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r2c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r2c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                    <img id="r2c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r2c2c3" class="full off col2 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r2c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r2c3c3" class="full off col3 c3" src="gold_coin.svg" />
-                </div>
-            </div>
-            <div class="coin_row">
-                <div class="coin_column">
-                    <img id="r3c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r3c1c3" class="full off col1 c3" src="gold_coin.svg" />
-                </div>
-                <div class="coin_column">
-                    <img id="r3c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r3c2c3" class="full off col2 c3" src="gold_coin.svg" />
-                </div>
-                <div class="coin_column">
-                    <img id="r3c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r3c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                    <img id="r2c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r2c3c3" class="full off col3 c3" src="heads.png" />
                 </div>
             </div>
             <div class="coin_row">
                 <div class="coin_column">
-                    <img id="r4c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r4c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                    <img id="r3c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r3c1c3" class="full off col1 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r4c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r4c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                    <img id="r3c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r3c2c3" class="full off col2 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r4c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r4c3c3" class="full off col3 c3" src="gold_coin.svg" />
-                </div>
-            </div>
-            <div class="coin_row">
-                <div class="coin_column">
-                    <img id="r5c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r5c1c3" class="full off col1 c3" src="gold_coin.svg" />
-                </div>
-                <div class="coin_column">
-                    <img id="r5c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r5c2c3" class="full off col2 c3" src="gold_coin.svg" />
-                </div>
-                <div class="coin_column">
-                    <img id="r5c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r5c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                    <img id="r3c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r3c3c3" class="full off col3 c3" src="heads.png" />
                 </div>
             </div>
             <div class="coin_row">
                 <div class="coin_column">
-                    <img id="r6c1c2" class="full off col1 c2" src="silver_coin.svg" />
-                    <img id="r6c1c3" class="full off col1 c3" src="gold_coin.svg" />
+                    <img id="r4c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r4c1c3" class="full off col1 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r6c2c2" class="full off col2 c2" src="silver_coin.svg" />
-                    <img id="r6c2c3" class="full off col2 c3" src="gold_coin.svg" />
+                    <img id="r4c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r4c2c3" class="full off col2 c3" src="heads.png" />
                 </div>
                 <div class="coin_column">
-                    <img id="r6c3c2" class="full off col3 c2" src="silver_coin.svg" />
-                    <img id="r6c3c3" class="full off col3 c3" src="gold_coin.svg" />
+                    <img id="r4c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r4c3c3" class="full off col3 c3" src="heads.png" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r5c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r5c1c3" class="full off col1 c3" src="heads.png" />
+                </div>
+                <div class="coin_column">
+                    <img id="r5c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r5c2c3" class="full off col2 c3" src="heads.png" />
+                </div>
+                <div class="coin_column">
+                    <img id="r5c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r5c3c3" class="full off col3 c3" src="heads.png" />
+                </div>
+            </div>
+            <div class="coin_row">
+                <div class="coin_column">
+                    <img id="r6c1c2" class="full off col1 c2" src="tails.png" />
+                    <img id="r6c1c3" class="full off col1 c3" src="heads.png" />
+                </div>
+                <div class="coin_column">
+                    <img id="r6c2c2" class="full off col2 c2" src="tails.png" />
+                    <img id="r6c2c3" class="full off col2 c3" src="heads.png" />
+                </div>
+                <div class="coin_column">
+                    <img id="r6c3c2" class="full off col3 c2" src="tails.png" />
+                    <img id="r6c3c3" class="full off col3 c3" src="heads.png" />
                 </div>
             </div>
         </div>
