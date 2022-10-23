@@ -196,6 +196,7 @@
             '革', '鼎', '震', '艮', '漸', '歸妹', '豐', '旅', '巽', '兌', '渙', '節', '中孚', '小過', '既濟', '未濟',
         ];
         let currentRow = 0;
+        let nbarsMoved = 0;
 
         function separateBars(bars) {
             for (const bar of bars) {
@@ -209,10 +210,7 @@
             }
         }
 
-        function collapseBars() {
-            for (let i = 1; i <= 6; ++i) {
-                document.getElementById(`bar${i}`).style.animation = `${shortAnimationDuration}s ease-out forwards move-bar-${i}`;
-            }
+        function fadeInCharacters() {
             let leftValue = 0, rightValue = 0;
             for (const barNumber of barNumbers) {
                 leftValue >>= 1;
@@ -241,6 +239,7 @@
             containerThree.children[1].innerText = rightName;
             containerThree.children[4].innerText = leftIndex + 1;
             containerThree.children[5].innerText = rightIndex + 1;
+            setTimeout(() => { document.querySelector('.container.three').style.animation = `${shortAnimationDuration}s ease-out forwards fade-in`; }, betweenDelay);
         }
 
         function onAnimationEnd(event) {
@@ -260,15 +259,16 @@
                         setTimeout(() => separateBars(bars), betweenDelay);
                     } else {
                         document.styleSheets[0].insertRule('.another{opacity:0}');
-                        setTimeout(collapseBars, betweenDelay);
+                        setTimeout(fadeInCharacters, betweenDelay);
                     }
                 } else {
                     document.getElementById('throw').disabled = false;
                 }
             } else if (event.animationName === 'move-bar-farther-right') {
-                setTimeout(collapseBars, betweenDelay);
-            } else if (event.animationName === 'move-bar-6') {
-                setTimeout(() => { document.querySelector('.container.three').style.animation = `${shortAnimationDuration}s ease-out forwards fade-in`; }, betweenDelay);
+                ++nbarsMoved;
+                if (nbarsMoved === 6) {
+                    setTimeout(fadeInCharacters, betweenDelay);
+                }
             }
         }
 
@@ -366,7 +366,7 @@
     <script>
         for (let i = 1; i <= 6; ++i) {
             document.getElementById(`bar${i}`).style.top = `${323 - 90 * i}px`;
-            document.styleSheets[0].insertRule(`@keyframes move-bar-${i}{from{margin-top:0px}to{margin-top:${79 * i - 290}px}}`);
+            document.getElementById(`bar${i}`).style.marginTop = `${79 * i - 290}px`;
         }
         document.getElementById('throw').addEventListener('click', start);
     </script>
