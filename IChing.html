@@ -1,5 +1,7 @@
+<!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <title>I Ching</title>
     <style>
@@ -9,37 +11,7 @@
             }
 
             to {
-                height: 90px;
-            }
-        }
-
-        @keyframes left-move-right {
-            from {
-                margin-left: 0px;
-            }
-
-            to {
-                margin-left: 120px;
-            }
-        }
-
-        @keyframes center-move-right {
-            from {
-                margin-left: 0px;
-            }
-
-            to {
-                margin-left: 180px;
-            }
-        }
-
-        @keyframes right-move-right {
-            from {
-                margin-left: 0px;
-            }
-
-            to {
-                margin-left: 240px;
+                height: 30px;
             }
         }
 
@@ -125,7 +97,7 @@
 
         .coin {
             height: 30px;
-            margin-left: 0px;
+            margin-left: 3px;
             margin-top: 0px;
             position: absolute;
         }
@@ -146,25 +118,19 @@
         }
 
         .content {
-            align-items: center;
-            display: flex;
-            height: 100%;
+            margin-top: 250px;
         }
 
         .container.one {
-            border: 1px solid black;
             position: absolute;
-            padding: 3px;
             width: 96px;
-            height: 216px;
+            height: 60px;
             display: flex;
             flex-direction: column-reverse;
             align-items: center;
         }
 
         .one.top {
-            position: absolute;
-            top: 93px;
             width: 90px;
         }
 
@@ -173,7 +139,6 @@
         }
 
         .bar.container {
-            left: 290px;
             position: absolute;
         }
 
@@ -190,7 +155,8 @@
             height: 195px;
             grid-gap: 19px;
             font-size: 48px;
-            left: 473px;
+            left: 183px;
+            top: 154px;
         }
 
         .character {
@@ -325,7 +291,6 @@
             for (let i = 0; i < coins.length; ++i) {
                 bars[i].addEventListener('animationend', onAnimationEnd);
                 coins[i].addEventListener('animationend', onAnimationEnd);
-                const position = i < 2 ? 'left' : i < 4 ? 'center' : 'right';
                 const side = i % 2 ? 'tails' : 'heads';
                 const landOnHeads = results[Math.floor(i / 2)] < 2;
                 const rotateQuickly = results[Math.floor(i / 2)] % 2;
@@ -333,9 +298,8 @@
                     rotateQuickly ? `${longAnimationDuration / 5}s` : `${longAnimationDuration / 4}s` :
                     rotateQuickly ? `${longAnimationDuration / 5.5}s` : `${longAnimationDuration / 4.5}s`;
                 const count = landOnHeads ? rotateQuickly ? '5' : '4' : rotateQuickly ? '5.5' : '4.5';
-                const animation = `${longAnimationDuration}s linear forwards grow, ${longAnimationDuration}s linear forwards ` +
-                    `move-coin-${currentRow}, ${longAnimationDuration}s linear forwards ${position}-move-right, ${time} linear ` +
-                    `${count} forwards flip-${side}-coin, ${shortAnimationDuration}s ease-in ${longAnimationDuration}s forwards fade-out`;
+                const animation = `${longAnimationDuration}s linear forwards grow, ${time} linear ${count} forwards ` +
+                    `flip-${side}-coin, ${shortAnimationDuration}s ease-in ${longAnimationDuration}s forwards fade-out`;
                 console.log(animation);
                 coins[i].style.animation = animation;
             }
@@ -401,7 +365,6 @@
     <script>
         for (let i = 1; i <= 6; ++i) {
             document.getElementById(`bar${i}`).style.top = `${323 - 90 * i}px`;
-            document.styleSheets[0].insertRule(`@keyframes move-coin-${i}{from{margin-top:0px}to{margin-top:${300 - 90 * i}px}}`);
             document.styleSheets[0].insertRule(`@keyframes move-bar-${i}{from{margin-top:0px}to{margin-top:${79 * i - 290}px}}`);
         }
         document.getElementById('throw').addEventListener('click', start);
